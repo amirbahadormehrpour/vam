@@ -24,6 +24,7 @@ class CustomUserManager(BaseUserManager):
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     phone_number = models.CharField(max_length=15, unique=True, verbose_name='شماره تلفن')
     national_id = models.CharField(max_length=10, unique=True, verbose_name='کد ملی')
+    referred_by_code = models.CharField(max_length=10, null=True, blank=True, verbose_name='دعوت شده توسط')
     is_active = models.BooleanField(default=False, verbose_name='فعال')
     is_staff = models.BooleanField(default=False, verbose_name='کارمند')
     is_approved_by_admin = models.BooleanField(default=False, verbose_name='تایید شده توسط مدیر')
@@ -51,7 +52,7 @@ class Profile(models.Model):
     back_national_card = models.ImageField(upload_to='national_cards/back/', null=True, blank=True, verbose_name='عکس پشت کارت ملی')
     postal_code = models.CharField(max_length=10, verbose_name='کد پستی')
     credit_score = models.IntegerField(default=1, verbose_name='درجه خوش‌حسابی')
-    sheba_number = models.CharField(max_length=26, verbose_name='شماره شبا')
+    sheba_number = models.CharField(max_length=26 ,null=True, blank=True, verbose_name='شماره شبا')
     coins = models.IntegerField(default=0, verbose_name='سکه‌ها')
 
     def __str__(self):

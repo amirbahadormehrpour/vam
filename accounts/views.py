@@ -1,22 +1,7 @@
 # accounts/views.py
 from rest_framework import generics
-from rest_framework.views import APIView
-from .models import CustomUser
 from .serializers import CustomUserSerializer
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.response import Response
-from rest_framework import status, permissions
-from rest_framework.authtoken.models import Token
-from django.contrib.auth import authenticate
-
-# accounts/views.py
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status, permissions
-from rest_framework.authtoken.models import Token
-from accounts.models import CustomUser
-
-# accounts/views.py
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, permissions

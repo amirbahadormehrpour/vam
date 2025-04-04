@@ -9,6 +9,7 @@ from .serializers import (
 )
 from accounts.models import CustomUser
 from decimal import Decimal
+from notifications.models import Notification
 
 
 class WalletListCreateView(generics.ListCreateAPIView):
@@ -61,6 +62,17 @@ class TransferView(generics.CreateAPIView):
 
         serializer.save(sender=self.request.user, receiver=receiver, amount=amount, transaction_type='transfer')
 
+        # ارسال نوتیفیکیشن
+        Notification.objects.create(
+            user=self.request.user,
+            message=f"شما {amount} تومان به {receiver.phone_number} منتقل کردید"
+        )
+        Notification.objects.create(
+            user=receiver,
+            message=f"{self.request.user.phone_number} مبلغ {amount} تومان به شما منتقل کرد"
+        )
+        # return Response({'message': 'انتقال با موفقیت انجام شد'}, status=status.HTTP_201_CREATED)
+    
     def create(self, request, *args, **kwargs):
         try:
             response = super().create(request, *args, **kwargs)

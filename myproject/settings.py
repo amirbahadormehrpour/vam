@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'wallet',
     'referral',
     'stories',
+    'payments',
+    'notifications',
 ]
 
 MIDDLEWARE = [
